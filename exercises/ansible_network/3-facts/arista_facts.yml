@@ -41,6 +41,12 @@
       become: true
       run_once: true
 
+    - name: Clone GitHub repository
+      git:
+        repo: https://github.com/takitou27/eda-config-repos.git
+        dest: "/backup/{{hostvars['backup-server'].datetime}}"
+      register: git_result
+
     - name: save configuration to backup server
       copy:
         src: "{{ config_output.backup_path }}"
@@ -58,3 +64,16 @@
       become: true
       delegate_to: backup-server
       delegate_facts: true
+
+    - name: Add changes to Git repository
+      command: git --git-dir=/backup/{{hostvars['backup-server'].datetime}}/.git --work-tree=/backup/{{hostvars['backup-server'].datetime}}/ add .
+      when: git_result.changed
+
+    - name: Commit changes to Git repository
+      command: git --git-dir=/backup/{{hostvars['backup-server'].datetime}}/.git --work-tree=/backup/{{hostvars['backup-server'].datetime}}/ commit -m "Commit message"
+      when: git_result.changed
+
+    - name: Push changes to Git repository
+      command: git --git-dir=/backup/{{hostvars['backup-server'].datetime}}/.git --work-tree=/backup/{{hostvars['backup-server'].datetime}}/ push origin main
+      when: git_result.changed
+      
