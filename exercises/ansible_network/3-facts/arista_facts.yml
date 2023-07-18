@@ -1,6 +1,6 @@
 ---
 - name: network configuration to git repos
-  hosts: arista
+  hosts: 3.67.197.180
   gather_facts: no
 
   tasks:
