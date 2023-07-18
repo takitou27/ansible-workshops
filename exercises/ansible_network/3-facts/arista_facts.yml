@@ -45,6 +45,7 @@
       ansible.builtin.file:
         path: "/backup/{{hostvars['backup-server'].datetime}}"
         state: directory
+        mode: "0777"
       delegate_to: backup-server
       become: true
       run_once: true
