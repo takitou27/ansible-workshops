@@ -85,7 +85,7 @@
         
     - name: copy folders
       copy:
-        dest: "/backup/{{hostvars['backup-server'].datetime}}/"
+        dest: "/backup/{{hostvars['backup-server'].datetime}}/eda-config-repos/"
         src: "{{ config_output.backup_path }}"
       delegate_to: backup-server
       become: true
@@ -97,7 +97,7 @@
         git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible " && git push
         
       args:
-        chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
+        chdir: "/backup/{{hostvars['backup-server'].datetime}}/eda-config-repos/"
       ignore_errors: true
       register: output
       failed_when: >
