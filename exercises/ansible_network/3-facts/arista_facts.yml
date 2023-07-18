@@ -67,12 +67,12 @@
 #        update: yes
 
     - name: Clone Git Repos
-      ansible.builtin.shell: "git clone https://github.com/takitou27/eda-config-repos.git"
-        args:
-          chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
-        delegate_to: backup-server
-        delegate_facts: true
-        run_once: true
+      ansible.builtin.shell: git clone https://github.com/takitou27/eda-config-repos.git
+      args:
+        chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
+      delegate_to: backup-server
+      delegate_facts: true
+      run_once: true
         
     - name: copy folders
       copy:
@@ -89,20 +89,20 @@
         git config --global user.email "rhaap@redhat.com"
         git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible " && git push
         
-        args:
-          chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
-        ignore_errors: true
-        register: output
-        failed_when: >
-          output.msg != "" and
-          ("error" in output.msg or
-          "conflict" in output.msg or
-          "Errno" in output.msg or
-          "fatal" in output.msg or
-          (output.stdout != "" and
-          "nothing to commit, working tree clean" not in output.stdout) or
-          (output.stderr != ""))
-        delegate_to: backup-server
-        delegate_facts: true
-        run_once: true
+      args:
+        chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
+      ignore_errors: true
+      register: output
+      failed_when: >
+        output.msg != "" and
+        ("error" in output.msg or
+        "conflict" in output.msg or
+        "Errno" in output.msg or
+        "fatal" in output.msg or
+        (output.stdout != "" and
+        "nothing to commit, working tree clean" not in output.stdout) or
+        (output.stderr != ""))
+      delegate_to: backup-server
+      delegate_facts: true
+      run_once: true
 
