@@ -87,11 +87,9 @@
       copy:
         dest: "/backup/{{hostvars['backup-server'].datetime}}/"
         src: "{{ config_output.backup_path }}"
-        force: true
-        delegate_to: backup-server
-        delegate_facts: true
-        run_once: true
-
+      delegate_to: backup-server
+      become: true
+      
     - name: "Add output directory to git"
       ansible.builtin.shell: |
         git config --global user.name "rhaap"
