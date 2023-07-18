@@ -92,8 +92,8 @@
       
     - name: "Add output directory to git"
       ansible.builtin.shell: |
-        git config --global user.name "rhaap"
-        git config --global user.email "rhaap@redhat.com"
+        git config --global user.name "takitou27"
+        git config --global user.email "takito@redhat.com"
         git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible " && git push
         
       args:
