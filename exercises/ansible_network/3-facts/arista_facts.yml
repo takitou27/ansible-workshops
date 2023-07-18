@@ -60,7 +60,7 @@
         git config --global user.email "rhaap@redhat.com"
         git add -A && git commit -m "RHAAP Job ID {{ tower_job_id }}: Automated Commit by Ansible  " && git push
       args:
-        chdir: "/backup/{{hostvars['backup-server'].datetime}} "
+        chdir: "/backup/{{hostvars['backup-server'].datetime}}/"
       ignore_errors: true
       register: output
       failed_when: >
