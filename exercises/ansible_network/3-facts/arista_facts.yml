@@ -41,6 +41,14 @@
       become: true
       run_once: true
 
+    - name: Create a directory datetime
+      ansible.builtin.file:
+        path: "/backup/{{hostvars['backup-server'].datetime}}"
+        state: directory
+      delegate_to: backup-server
+      become: true
+      run_once: true
+
 #    - name: save configuration to backup server
 #      copy:
 #        src: "{{ config_output.backup_path }}"
