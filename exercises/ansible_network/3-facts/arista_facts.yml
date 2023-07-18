@@ -2,6 +2,8 @@
 - name: gather information from routers
   hosts: arista
   gather_facts: false
+  vars:
+    targethost: "192.168.0.1"
     
   tasks:
     - name: gather router facts
