@@ -41,12 +41,30 @@
       become: true
       run_once: true
 
-    - name: Clone GIT Repository
-      ansible.builtin.git:
-        repo: https://github.com/takitou27/eda-config-repos.git
-        dest: "/backup/{{hostvars['backup-server'].datetime}}"
-        clone: yes
-        update: yes
+    - name: save configuration to backup server
+      copy:
+        src: "{{ config_output.backup_path }}"
+        dest: "/backup/{{hostvars['backup-server'].datetime}}/"
+      when: config_output is defined
+      become: true
+      delegate_to: backup-server
+
+    - name: find backups
+      find:
+        paths: /backup
+        file_type: directory
+      register: backups
+      run_once: true
+      become: true
+      delegate_to: backup-server
+      delegate_facts: true
+
+#    - name: Clone GIT Repository
+#      ansible.builtin.git:
+#        repo: https://github.com/takitou27/eda-config-repos.git
+#        dest: "/backup/{{hostvars['backup-server'].datetime}}"
+#        clone: yes
+#        update: yes
         
  #   - name: copy folders
  #     copy:
