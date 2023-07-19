@@ -4,7 +4,7 @@
   gather_facts: no
 
   tasks:
-  - name: run multiple commands and evaluate the output
+  - name: run multiple commands
     arista.eos.eos_command:
       commands:
       - show interfaces transceiver detail
@@ -12,3 +12,8 @@
       - show ip arp
       - show ip ospf neighbor 
       - show ip route
+      register: result
+
+  - name: view result 
+    debug:
+      msg: "{{ result }}"
