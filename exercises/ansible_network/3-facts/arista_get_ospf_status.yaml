@@ -12,4 +12,3 @@
       - show ip arp
       - show ip ospf neighbor 
       - show ip route
-      - show tech-support all
