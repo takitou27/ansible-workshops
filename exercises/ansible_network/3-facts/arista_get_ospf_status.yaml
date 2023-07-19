@@ -16,4 +16,4 @@
 
   - name: view result 
     debug:
-      msg: "{{ result }}"
+      msg: "{{ result.stdout_lines }}"
