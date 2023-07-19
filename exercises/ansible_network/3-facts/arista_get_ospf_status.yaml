@@ -1,6 +1,6 @@
 ---
 - name: Get OSPF Status
-  hosts: all
+  hosts: arista
   gather_facts: no
 
   tasks:
