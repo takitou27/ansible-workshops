@@ -12,7 +12,8 @@
       - show ip arp
       - show ip ospf neighbor 
       - show ip route
-      register: result
+      output: json
+    register: result
 
   - name: view result 
     debug:
