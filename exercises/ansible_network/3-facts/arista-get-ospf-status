@@ -1,0 +1,15 @@
+---
+- name: Get OSPF Status
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: run multiple commands and evaluate the output
+    arista.eos.eos_command:
+      commands:
+      - show interfaces transceiver detail
+      - show interfaces counters errors
+      - show ip arp
+      - show ip ospf neighbor 
+      - show ip route
+      - show tech-support all
