@@ -1,6 +1,6 @@
 ---
 - name: network configuration to git repos
-  hosts: 3.67.197.180
+  hosts: all
   gather_facts: no
 
   tasks:
